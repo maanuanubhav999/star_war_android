@@ -57,12 +57,12 @@ gradlePlugin {
 //        }
 //
 //        }
-//        register("androidHilt") {
-//            id = "nowinandroid.android.hilt"
-//            implementationClass = "AndroidHiltConventionPlugin"
-//        }
+        register("androidHilt") {
+            id = "asraven.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
         register("androidRoom") {
-            id = "nowinandroid.android.room"
+            id = "asraven.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
 

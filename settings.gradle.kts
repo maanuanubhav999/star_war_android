@@ -17,3 +17,4 @@ rootProject.name = "Star_wars"
 include(":app")
 include(":data")
 include(":domain")
+include(":build-logic")

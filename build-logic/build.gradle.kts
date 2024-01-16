@@ -1,44 +1,70 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinAndroid)
+    `kotlin-dsl`
 }
 
-android {
-    namespace = "com.asraven.start_wars.build_logic"
-    compileSdk = 34
+group = "com.asraven.start_wars.build_logic"
 
-    defaultConfig {
-        minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+// Configure the build-logic plugins to target JDK 17
+// This matches the JDK used to build the project, and is not related to what is running on device.
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
 dependencies {
+    compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.room.gradlePlugin)
+}
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+tasks {
+    validatePlugins {
+        enableStricterValidation = true
+        failOnWarning = true
+    }
+}
+
+gradlePlugin {
+    plugins {
+//        register("androidApplicationCompose") {
+//            id = "nowinandroid.android.application.compose"
+//            implementationClass = "AndroidApplicationComposeConventionPlugin"
+//        }
+//        register("androidApplication") {
+//            id = "nowinandroid.android.application"
+//            implementationClass = "AndroidApplicationConventionPlugin"
+//        }
+//
+//        register("androidLibraryCompose") {
+//            id = "nowinandroid.android.library.compose"
+//            implementationClass = "AndroidLibraryComposeConventionPlugin"
+//        }
+//        register("androidLibrary") {
+//            id = "nowinandroid.android.library"
+//            implementationClass = "AndroidLibraryConventionPlugin"
+//        }
+//        register("androidFeature") {
+//            id = "nowinandroid.android.feature"
+//            implementationClass = "AndroidFeatureConventionPlugin"
+//        }
+//
+//        }
+//        register("androidHilt") {
+//            id = "nowinandroid.android.hilt"
+//            implementationClass = "AndroidHiltConventionPlugin"
+//        }
+        register("androidRoom") {
+            id = "nowinandroid.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
+
+    }
 }

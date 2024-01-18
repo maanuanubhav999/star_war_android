@@ -58,7 +58,6 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "pagingVersion" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
-androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 
 
 #build-logic dependencies

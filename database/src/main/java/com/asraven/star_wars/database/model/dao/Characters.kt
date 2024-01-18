@@ -2,6 +2,7 @@ package com.asraven.star_wars.database.model.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.asraven.star_wars.database.model.CharacterEntity
 import com.asraven.star_wars.model.CharacterStarWars
 import kotlinx.coroutines.flow.Flow
 
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CharactersDao {
     @Query("SELECT * FROM characters")
-    fun getAll(): Flow<List<CharacterStarWars>>
+    fun getAll(): Flow<List<CharacterEntity>>
 
 //    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
 //    fun loadAllByIds(userIds: IntArray): List<User>

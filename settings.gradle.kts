@@ -1,4 +1,5 @@
 pluginManagement {
+//    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -17,5 +18,5 @@ rootProject.name = "Star_wars"
 include(":app")
 include(":data")
 include(":domain")
-include(":build-logic")
 include(":database")
+include(":model")

@@ -46,6 +46,17 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging)
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.paging)
+//    viewModel injection
+    implementation(libs.androidx.hilt.navigation.compose)
+
 }
 
 // Allow references to generated code

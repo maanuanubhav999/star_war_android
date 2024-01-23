@@ -11,7 +11,7 @@ import com.asraven.star_wars.model.CharacterStarWars
 )
 data class CharacterEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: String,
+    val id: Int,
     @ColumnInfo(name = "birth_year")
     val birthYear: String,
     val created: String,
@@ -29,7 +29,7 @@ data class CharacterEntity(
     val name: String,
     @ColumnInfo(name = "skin_color")
     val skinColor: String,
-    val species: List<Any>,
+    val species: List<String>,
     val starships: List<String>,
     val url: String,
     val vehicles: List<String>

@@ -2,6 +2,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    kotlin("kapt")
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -57,6 +59,14 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.runtime.compose)
 
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.coil.compose)
 
 
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

@@ -12,6 +12,7 @@ import com.asraven.star_wars.home.viewmodel.HomeViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.asraven.star_wars.home.views.CharacterBox
 import com.asraven.star_wars.model.CharacterStarWars
 
 @Composable
@@ -26,19 +27,13 @@ import com.asraven.star_wars.model.CharacterStarWars
 
     if (uiState.loading) Text("loading")
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp),
+        columns = GridCells.Adaptive(minSize = 200.dp),
     ){
         items (lazyPagingItems.itemCount) {
-            Represent(lazyPagingItems[it]?.name?: "test")
+            lazyPagingItems[it]?.let { it1 -> CharacterBox(it1) }
 
         }
     }
 
-    Text("loading")
-
 }
 
-@Composable
-fun Represent(text: String){
-    Text(text)
-}

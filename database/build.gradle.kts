@@ -52,14 +52,18 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
+    api(libs.room.runtime)
+    api(libs.room.ktx)
     kapt(libs.room.compiler)
+    api(libs.room.paging)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
     implementation(libs.retrofit.converter.gson)
+
+    implementation(libs.androidx.paging)
+
 
 }
 

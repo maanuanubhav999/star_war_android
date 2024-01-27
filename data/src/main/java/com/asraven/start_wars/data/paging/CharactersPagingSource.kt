@@ -27,7 +27,7 @@ class CharactersPagingSource(
                     LoadResult.Page(
                         data = allCharactersResponse.results,
                         prevKey = allCharactersResponse.previous?.substringAfterLast("page=")?.toIntOrNull(),
-                        nextKey = allCharactersResponse.next.substringAfterLast("page=").toIntOrNull()
+                        nextKey = allCharactersResponse.next?.substringAfterLast("page=")?.toIntOrNull()
                     )
                 } catch (e: IOException) {
                     LoadResult.Error(e)

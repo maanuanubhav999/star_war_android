@@ -4,7 +4,7 @@ import com.asraven.star_wars.model.CharacterStarWars
 
 data class AllCharactersResponse(
     val count: Int,
-    val next: String,
+    val next: String?,
     val previous: String?,
     val results: List<CharacterStarWars>
 )

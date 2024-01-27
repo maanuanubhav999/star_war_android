@@ -1,24 +1,34 @@
 package com.asraven.start_wars.data
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.RemoteMediator
+import androidx.paging.map
+import com.asraven.star_wars.database.model.AppDatabase
 import com.asraven.star_wars.database.model.CharacterEntity
 import com.asraven.star_wars.database.model.asExternalModule
 import com.asraven.star_wars.database.model.dao.CharactersDao
 import com.asraven.star_wars.model.CharacterStarWars
+import com.asraven.start_wars.data.paging.CharacterPagingSourceUsingRemoteMediator
 import com.asraven.start_wars.data.paging.CharactersPagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class OfflineFirstCharactersRepository @Inject constructor(
-    private val charactersDao: CharactersDao,
-    private val api: Api
+//    private val charactersDao: CharactersDao,
+    private val database: AppDatabase,
+    private val api: Api,
 ): CharactersRepository {
+    @OptIn(ExperimentalPagingApi::class)
     override fun getCharactersResources(pageNumber: Int): Flow<PagingData<CharacterStarWars>> =
-         Pager(PagingConfig(pageSize = 1)) { CharactersPagingSource(api) }.flow
+         Pager(PagingConfig(pageSize = 1), remoteMediator = CharacterPagingSourceUsingRemoteMediator(database, api)) { database.charactersDao().pagingSource() }.flow.map { pagingData ->  pagingData.map { it.asExternalModule() } }
 
+//    call this if we want to load directly from api
+//    override fun getCharactersResources(pageNumber: Int): Flow<PagingData<CharacterStarWars>> =
+//              Pager(PagingConfig(pageSize = 1)) { CharactersPagingSource(api) }.flow
 
     override suspend fun syncWith(synchronizer: Synchronizer): Boolean {
 

@@ -54,3 +54,24 @@ fun CharacterEntity.asExternalModule() = CharacterStarWars(
     url = url,
     vehicles = vehicles
 )
+
+
+fun CharacterStarWars.asInternalModule() = CharacterEntity(
+    birthYear = birth_year,
+    created = created,
+    edited = edited,
+    eyeColor = eye_color,
+    films = films,
+    gender = gender,
+    hairColor = hair_color,
+    height = height,
+    homeWorld = homeworld,
+    mass = mass,
+    name = name,
+    skinColor = skin_color,
+    species = species,
+    starships = starships,
+    url = url,
+    vehicles = vehicles,
+    id = this.hashCode()
+)
